@@ -1,0 +1,12 @@
+# Home Assistant is how I automate my home
+version: '3.7'
+services:
+  hass:
+    image: homeassistant/home-assistant:stable
+    environment:
+      TZ: America/New_York
+    volumes:
+      - ./data/config:/config
+    # Needs 'network_mode: host' to access smart plugs etc.
+    network_mode: host
+    restart: always

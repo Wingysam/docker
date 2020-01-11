@@ -1,0 +1,18 @@
+# Organizr has a column of services on the left and the current service taking most of the screen.
+# It looks a lot like Discord.
+version: '3.7'
+services:
+  organizr:
+    image: organizrtools/organizr-v2
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      TZ: America/New_York
+    volumes:
+      - ./data/config:/config
+    labels:
+      caddy.address: 'home.wingysam.xyz'
+      caddy.targetport: 80
+      caddy.proxy.transparent: ''
+      caddy.proxy.websocket: ''
+    restart: always

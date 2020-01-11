@@ -1,0 +1,17 @@
+# Bitwarden is my password manager of choice.
+version: '3.7'
+services:
+  bitwarden:
+    image: bitwardenrs/server
+    environment:
+      TZ: America/New_York
+      SIGNUPS_ALLOWED: 'false'
+      ADMIN_TOKEN: ${ADMIN_TOKEN}
+    volumes:
+      - ./data:/data
+    ports:
+      # Unfortunately, this needs two ports. I don't know how to use caddy-docker-proxy with that.
+      - 10009:80
+      - 10010:3012
+    restart: always
+    privileged: true

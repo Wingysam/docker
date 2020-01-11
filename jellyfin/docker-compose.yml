@@ -1,0 +1,18 @@
+# Jellyfin is where I store my DVD rips and all those movies from a hard drive someone gave us once.
+# Supposedly they ripped their own Blu-rays.
+version: '3.7'
+services:
+    jellyfin:
+      image: jellyfin/jellyfin
+      restart: always
+      # I don't use caddy-docker-proxy here
+      # Jellyfin needs it to send video to our TV with DLNA.
+      network_mode: host
+      volumes:
+        - ./data/config:/config
+        - ./data/cache:/cache
+        - ./data/Media/Movies:/media/movies
+        - ./data/Media/TV:/media/tv
+        - ./data/Media/School:/media/school
+        - ./data/Media/Home:/media/home
+        - ./data/Media/TV (Kids):/media/tv-kids

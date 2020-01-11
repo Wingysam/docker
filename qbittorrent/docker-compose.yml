@@ -1,0 +1,26 @@
+# qBittorrent is how I get my Linux ISOs.
+# In more seriousness, I use it to download archives of things (like Linux Journal) and pentesting stuff (like Collection 1)
+version: '3.7'
+services:
+  qbittorrentvpn:
+    image: markusmcnugen/qbittorrentvpn
+    environment:
+      TZ: America/New_York
+      # My VPN subscription ran out and I'm not torrenting illegal things.
+      VPN_ENABLED: 'no'
+      LAN_NETWORK: 192.168.1.0/24
+      WEBUI_PORT: 10006
+    volumes:
+      - ./data/config:/config
+      # I have this symlinked to my main downloads directory.
+      - ./data/downloads:/downloads
+    labels:
+      caddy.address: qbittorrent.home.wingysam.xyz
+      caddy.targetport: 10006
+      # This allows Organizr to display this.
+      caddy.proxy.header_downstream: Content-Security-Policy "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; object-src 'none'; form-action 'self'; frame-ancestors 'self' home.wingysam.xyz;"
+      caddy.proxy.transparent: ''
+    restart: always
+    privileged: true
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0

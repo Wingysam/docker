@@ -1,0 +1,11 @@
+# Free Mac Servers is my (in development, not dockerized fully yet) service for https://theblockheads.net
+version: '3.7'
+services:
+  couchdb:
+    image: couchdb
+    ports:
+      # This will be removed when the application is dockerized.
+      - 9909:5984
+    volumes:
+      - ./data/couchdb:/opt/couchdb/data
+    restart: always
