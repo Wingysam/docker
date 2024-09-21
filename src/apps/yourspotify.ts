@@ -39,4 +39,4 @@ app.services.mongo = {
   volumes: ['/nomad-ssd/yourspotify/db:/data/db'],
 }
 
-export const state = App(app)
+export const state = await App(app)

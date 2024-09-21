@@ -21,4 +21,4 @@ await ingress(app.services.app, {
   entrypoint: 'ts-https',
 })
 
-export const state = App(app)
+export const state = await App(app)
