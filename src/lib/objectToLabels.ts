@@ -5,6 +5,7 @@ export default async function objectToLabels(obj: any) {
       labels.push(
         ...(await objectToLabels(value)).map((label) => `${key}.${label}`),
       )
+    } else if (typeof value === 'undefined') {
     } else {
       labels.push(`${key}=${value}`)
     }
