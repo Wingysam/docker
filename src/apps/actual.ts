@@ -1,6 +1,5 @@
 import type { ComposeSpecification } from 'composepilot/compose-spec.ts'
 import ingress from 'lib/ingress.ts'
-import secrets from 'lib/secrets.ts'
 import App from 'lib/App.ts'
 
 const app: ComposeSpecification = {}
