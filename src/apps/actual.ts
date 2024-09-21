@@ -8,11 +8,6 @@ const app: ComposeSpecification = {}
 app.services = {}
 app.services.app = {
   image: 'ghcr.io/actualbudget/actual-server:24.7.0-alpine',
-  environment: {
-    TZ: 'America/New_York',
-    SIGNUPS_ALLOWED: 'false',
-    ADMIN_TOKEN: secrets.actual_admin_token,
-  },
   volumes: ['/nomad-nfs/actual:/data'],
 }
 await ingress(app.services.app, {
