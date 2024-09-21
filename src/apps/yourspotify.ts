@@ -1,7 +1,7 @@
 import type { ComposeSpecification } from 'composepilot/compose-spec.ts'
-import ingress from 'lib/ingress'
+import ingress from 'lib/ingress.ts'
 import secrets from 'lib/secrets.ts'
-import service from 'lib/service.ts'
+import App from 'lib/App.ts'
 
 export default async () => {
   const app: ComposeSpecification = {}
@@ -40,5 +40,5 @@ export default async () => {
     volumes: ['/nomad-ssd/yourspotify/db:/data/db'],
   }
 
-  return service(app)
+  return App(app)
 }
