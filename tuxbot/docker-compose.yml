@@ -1,9 +1,0 @@
-# TuxBot is a bot created by OS225 that I host - https://github.com/nlogozzo/TuxBot
-# I have a separate process where a GitHub webhook calls a script used to build the image and docker-compose up.
-version: "3"
-services:
-    tuxbot:
-      image: tux
-      restart: always
-      volumes:
-        - ./config.properties:/config.properties

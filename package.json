@@ -1,0 +1,12 @@
+{
+  "name": "docker",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "^3.3.3",
+    "composepilot": "git+https://github.com/Wingysam/ComposePilot.git"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
