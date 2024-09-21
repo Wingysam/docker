@@ -5,6 +5,7 @@ type Options = {
   hostname: string | string[]
   port?: number
   entrypoint?: string
+  certResolver?: string
 }
 
 export default async function ingress(
@@ -33,6 +34,7 @@ export default async function ingress(
                 .map((hostname) => `Host(\`${hostname}\`)`)
                 .join(' || '),
               tls: 'true',
+              'tls.certResolver': options.certResolver,
               entryPoints: entrypoint,
             },
           },
