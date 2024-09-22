@@ -13,6 +13,7 @@ app.services.app = {
   },
   volumes: [
     '/nomad-nfs/traefik/traefik.toml:/etc/traefik/traefik.toml',
+    '/nomad-nfs/traefik/dynamic.toml:/etc/traefik/dynamic.toml',
     '/nomad-nfs/traefik/acme:/etc/traefik/acme',
     '/nomad-nfs/traefik/logs:/logs',
     '/var/run/docker.sock:/var/run/docker.sock',
