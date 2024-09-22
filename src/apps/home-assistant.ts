@@ -22,7 +22,7 @@ await ingress(app.services.app, {
 
 app.networks = {
   vlan: {
-    driver: 'macvlan',
+    driver: 'ipvlan',
     driver_opts: {
       parent: 'br0',
     },
