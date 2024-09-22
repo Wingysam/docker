@@ -25,6 +25,7 @@ app.networks = {
     driver: 'ipvlan',
     driver_opts: {
       parent: 'br0',
+      ipvlan_mode: 'l3',
     },
     ipam: {
       config: [
