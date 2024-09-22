@@ -23,6 +23,7 @@ app.services.app = {
 }
 await ingress(app.services.app, {
   hostname: 'jellyfin.wing.lol',
+  port: 8096,
   entrypoint: 'ts-https',
 })
 
