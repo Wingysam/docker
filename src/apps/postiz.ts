@@ -19,14 +19,12 @@ app.services.postiz = {
     BACKEND_INTERNAL_URL: 'http://localhost:3000',
     IS_GENERAL: 'true',
   },
-  volumes: ['postiz-config:/config/'],
-  ports: ['5000:5000'],
-  networks: ['postiz-network'],
+  volumes: ['/nomad-nfs/postiz/config:/config/'],
   depends_on: {
-    'postiz-postgres': {
+    postgres: {
       condition: 'service_healthy',
     },
-    'postiz-redis': {
+    redis: {
       condition: 'service_healthy',
     },
   },
