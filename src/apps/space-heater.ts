@@ -43,7 +43,7 @@ async function isItColdOutside() {
   const data = await response.json()
   const { temperature } = data.attributes
 
-  return parseFloat(temperature) < TEMPERATURE_THRESHOLD
+  return temperature < TEMPERATURE_THRESHOLD
 }
 
 export const state = (await isItColdOutside()) ? await App(app) : {}
