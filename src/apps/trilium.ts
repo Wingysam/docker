@@ -14,11 +14,7 @@ app.services.app = {
   volumes: [
     '/nomad-ssd/trilium:/home/node/trilium-data',
     '/nomad-ssd/trilium/sessions:/tmp/trilium-sessions',
-    {
-      type: 'bind',
-      source: '/nomad-ssd/trilium/node_modules_symlink',
-      target: '/node_modules',
-    },
+    '/nomad-ssd/trilium/npm/node_modules:/node_modules',
   ],
 }
 await ingress(app.services.app, {
