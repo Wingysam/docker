@@ -7,13 +7,14 @@ type Options = {
   entrypoint?: string
   certResolver?: string
   scheme?: string
+  insecureSkipVerify?: boolean
 }
 
 export default async function ingress(
   service: DefinitionsService,
   options: Options,
 ) {
-  const { hostname, port, entrypoint, scheme } = options
+  const { hostname, port, entrypoint, scheme, insecureSkipVerify } = options
   const hostnames = Array.isArray(hostname) ? hostname : [hostname]
 
   const routerName = hostnames
@@ -46,6 +47,9 @@ export default async function ingress(
                   port,
                   scheme,
                 },
+                serversTransport: insecureSkipVerify
+                  ? 'insecure@file'
+                  : undefined,
               },
             },
           },
