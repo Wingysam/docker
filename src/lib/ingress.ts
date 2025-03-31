@@ -6,13 +6,14 @@ type Options = {
   port?: number
   entrypoint?: string
   certResolver?: string
+  scheme?: string
 }
 
 export default async function ingress(
   service: DefinitionsService,
   options: Options,
 ) {
-  const { hostname, port, entrypoint } = options
+  const { hostname, port, entrypoint, scheme } = options
   const hostnames = Array.isArray(hostname) ? hostname : [hostname]
 
   const routerName = hostnames
@@ -43,6 +44,7 @@ export default async function ingress(
               loadbalancer: {
                 server: {
                   port,
+                  scheme,
                 },
               },
             },
