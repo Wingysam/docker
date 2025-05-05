@@ -6,7 +6,7 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.app = {
-  image: 'ghcr.io/actualbudget/actual-server:25.3.1-alpine',
+  image: 'ghcr.io/actualbudget/actual-server:25.5.0-alpine',
   volumes: ['/nomad-nfs/actual:/data'],
 }
 await ingress(app.services.app, {
