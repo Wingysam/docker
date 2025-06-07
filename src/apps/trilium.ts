@@ -6,7 +6,7 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.app = {
-  image: 'ghcr.io/triliumnext/notes:0.93.0',
+  image: 'ghcr.io/triliumnext/notes:v0.93.0',
   environment: {
     NODE_PATH:
       '/home/node/trilium-data/npm/node_modules:/home/node/trilium-data/npm/custom_modules',
