@@ -2,7 +2,7 @@ import type { ComposeSpecification } from 'composepilot/compose-spec.ts'
 import ingress from 'lib/ingress.ts'
 import App from 'lib/App.ts'
 
-const IMMICH_VERSION = 'v1.129.0'
+const IMMICH_VERSION = 'v1.132.0'
 const COMMON_ENV = {
   DB_HOSTNAME: 'database',
   DB_USERNAME: 'postgres',
@@ -37,15 +37,16 @@ app.services['immich-machine-learning'] = {
 
 app.services.redis = {
   image:
-    'redis:6.2-alpine@sha256:70a7a5b641117670beae0d80658430853896b5ef269ccf00d1827427e3263fa3',
+    'docker.io/valkey/valkey:8-bookworm@sha256:5b8f8c333bef895c925f56629d6ba90aea95a4f7391f62411e625267c600b19c',
 }
 
 app.services.database = {
-  image: 'tensorchord/pgvecto-rs:pg14-v0.2.0',
+  image: 'ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0',
   environment: {
     POSTGRES_PASSWORD: COMMON_ENV.DB_PASSWORD,
     POSTGRES_USER: COMMON_ENV.DB_USERNAME,
     POSTGRES_DB: COMMON_ENV.DB_DATABASE_NAME,
+    DB_STORAGE_TYPE: 'SSD',
   },
   volumes: ['/nomad-ssd/immich/pgdata:/var/lib/postgresql/data'],
 }
