@@ -2,7 +2,7 @@ import type { ComposeSpecification } from 'composepilot/compose-spec.ts'
 import ingress from 'lib/ingress.ts'
 import App from 'lib/App.ts'
 
-const IMMICH_VERSION = 'v2.0.0'
+const IMMICH_VERSION = 'v2.5.3'
 const COMMON_ENV = {
   DB_HOSTNAME: 'database',
   DB_USERNAME: 'postgres',
