@@ -13,12 +13,6 @@ const COMMON_ENV = {
 
 const app: ComposeSpecification = {}
 
-app.networks = {
-  backend: {
-    internal: true,
-  },
-}
-
 app.services = {}
 app.services['immich-server'] = {
   image: `ghcr.io/immich-app/immich-server:${IMMICH_VERSION}`,
@@ -27,7 +21,6 @@ app.services['immich-server'] = {
   },
   volumes: ['/data/.live-data/immich/upload:/usr/src/app/upload'],
   depends_on: ['redis', 'database'],
-  networks: ['backend'],
 }
 await ingress(app.services['immich-server'], {
   hostname: ['immich.wing.lol', 'immich.ts.wingysam.xyz'],
@@ -40,13 +33,11 @@ app.services['immich-machine-learning'] = {
     ...COMMON_ENV,
   },
   volumes: ['/nomad-ssd/immich/model-cache:/cache'],
-  networks: ['backend'],
 }
 
 app.services.redis = {
   image:
     'docker.io/valkey/valkey:8-bookworm@sha256:5b8f8c333bef895c925f56629d6ba90aea95a4f7391f62411e625267c600b19c',
-  networks: ['backend'],
 }
 
 app.services.database = {
@@ -58,7 +49,6 @@ app.services.database = {
     DB_STORAGE_TYPE: 'SSD',
   },
   volumes: ['/nomad-ssd/immich/pgdata:/var/lib/postgresql/data'],
-  networks: ['backend'],
 }
 
 export const state = await App(app)
