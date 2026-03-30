@@ -7,7 +7,7 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.app = {
-  image: 'vaultwarden/server:1.32.0',
+  image: 'vaultwarden/server:1.35.4',
   environment: {
     SIGNUPS_ALLOWED: 'false',
     ADMIN_TOKEN: secrets.bitwarden_admin_token,
