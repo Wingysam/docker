@@ -6,7 +6,7 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.app = {
-  image: 'traefik:v2.4.11',
+  image: 'traefik:v3.6.15',
   network_mode: 'host',
   environment: {
     CF_DNS_API_TOKEN: secrets.traefik_cloudflare_token,

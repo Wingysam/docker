@@ -36,8 +36,8 @@ export default async function ingress(
                 .map((hostname) => `Host(\`${hostname}\`)`)
                 .join(' || '),
               tls: 'true',
-              'tls.certResolver': options.certResolver,
-              entryPoints: entrypoint,
+              'tls.certresolver': options.certResolver,
+              entrypoints: entrypoint,
             },
           },
           services: {
@@ -47,7 +47,7 @@ export default async function ingress(
                   port,
                   scheme,
                 },
-                serversTransport: insecureSkipVerify
+                serverstransport: insecureSkipVerify
                   ? 'insecure@file'
                   : undefined,
               },
