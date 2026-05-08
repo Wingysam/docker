@@ -7,7 +7,7 @@
     {
       "fileMatch": ["^src/apps/.*\\.ts$"],
       "matchStrings": [
-        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s*\\n\\s*image:\\s*['`][^:'`\\s]+(?:\\/[^:'`\\s]+)*:(?<currentValue>[^'`\\s]+)['`]"
+        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s*\\n\\s*image:\\s*['`][^:'`\\s]+(?:\\/[^:'`\\s]+)*:(?<currentValue>[^@'`\\s]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?['`]"
       ]
     }
   ],
