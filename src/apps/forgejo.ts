@@ -6,6 +6,7 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.forgejo = {
+  // renovate: datasource=docker depName=codeberg.org/forgejo/forgejo
   image: 'codeberg.org/forgejo/forgejo:1.18.2-1',
   environment: {
     TZ: 'America/New_York',
@@ -26,6 +27,7 @@ await ingress(app.services.forgejo, {
 })
 
 app.services.postgres = {
+  // renovate: datasource=docker depName=postgres
   image: 'postgres:9.6',
   environment: {
     POSTGRES_USER: 'gitea',

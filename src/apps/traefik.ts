@@ -6,6 +6,7 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.app = {
+  // renovate: datasource=docker depName=traefik
   image: 'traefik:v3.6.15',
   network_mode: 'host',
   environment: {

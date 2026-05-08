@@ -6,6 +6,7 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.app = {
+  // renovate: datasource=docker depName=ghcr.io/triliumnext/trilium
   image: 'ghcr.io/triliumnext/trilium:v0.102.1',
   environment: {
     NODE_PATH:

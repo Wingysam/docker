@@ -6,7 +6,8 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.app = {
-  image: 'jellyfin/jellyfin',
+  // renovate: datasource=docker depName=jellyfin/jellyfin
+  image: 'jellyfin/jellyfin:latest',
   network_mode: 'host',
   volumes: [
     '/nomad-nfs/jellyfin/config:/config',
