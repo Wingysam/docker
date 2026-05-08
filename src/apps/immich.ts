@@ -38,8 +38,7 @@ app.services['immich-machine-learning'] = {
 
 app.services.redis = {
   // renovate: datasource=docker depName=docker.io/valkey/valkey
-  image:
-    'docker.io/valkey/valkey:8-bookworm@sha256:5b8f8c333bef895c925f56629d6ba90aea95a4f7391f62411e625267c600b19c',
+  image: 'docker.io/valkey/valkey:8-bookworm',
 }
 
 app.services.database = {
