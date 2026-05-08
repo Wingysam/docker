@@ -1,0 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "enabledManagers": ["regex"],
+  "prCreation": "immediate",
+  "regexManagers": [
+    {
+      "fileMatch": ["^src/apps/.*\\.ts$"],
+      "matchStrings": [
+        "// renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s*\\n\\s*image:\\s*['`][^:'`\\s]+(?:\\/[^:'`\\s]+)*:(?<currentValue>[^@'`\\s]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?['`]"
+      ]
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["regex"],
+      "matchDatasources": ["docker"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "platformAutomerge": true,
+      "minimumReleaseAge": "7 days"
+    }
+  ]
+}

@@ -6,6 +6,7 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.app = {
+  // renovate: datasource=docker depName=homeassistant/home-assistant
   image: 'homeassistant/home-assistant:stable',
   network_mode: 'host',
   volumes: ['/nomad-nfs/home-assistant/config:/config'],
