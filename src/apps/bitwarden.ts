@@ -7,6 +7,7 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.app = {
+  // renovate: datasource=docker depName=vaultwarden/server
   image: 'vaultwarden/server:1.35.4',
   environment: {
     SIGNUPS_ALLOWED: 'false',

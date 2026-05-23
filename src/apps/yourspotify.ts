@@ -7,7 +7,8 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.server = {
-  image: 'yooooomi/your_spotify_server',
+  // renovate: datasource=docker depName=yooooomi/your_spotify_server
+  image: 'yooooomi/your_spotify_server:latest',
   depends_on: ['mongo'],
   environment: {
     API_ENDPOINT: 'https://spotify-api.wing.lol',
@@ -23,7 +24,8 @@ await ingress(app.services.server, {
 })
 
 app.services.web = {
-  image: 'yooooomi/your_spotify_client',
+  // renovate: datasource=docker depName=yooooomi/your_spotify_client
+  image: 'yooooomi/your_spotify_client:latest',
   environment: {
     API_ENDPOINT: 'https://spotify-api.wing.lol',
   },
@@ -35,6 +37,7 @@ await ingress(app.services.web, {
 })
 
 app.services.mongo = {
+  // renovate: datasource=docker depName=mongo
   image: 'mongo:6',
   volumes: ['/nomad-ssd/yourspotify/db:/data/db'],
 }

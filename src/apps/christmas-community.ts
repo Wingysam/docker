@@ -6,7 +6,8 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.app = {
-  image: 'wingysam/christmas-community',
+  // renovate: datasource=docker depName=wingysam/christmas-community
+  image: 'wingysam/christmas-community:latest',
   environment: {
     MARKDOWN: 'true',
   },

@@ -8,6 +8,7 @@ const app: ComposeSpecification = {}
 app.services = {}
 
 app.services.postiz = {
+  // renovate: datasource=docker depName=ghcr.io/gitroomhq/postiz-app
   image: 'ghcr.io/gitroomhq/postiz-app:latest',
   environment: {
     MAIN_URL: 'https://postiz.wing.lol',
@@ -36,6 +37,7 @@ await ingress(app.services.postiz, {
 })
 
 app.services.postgres = {
+  // renovate: datasource=docker depName=postgres
   image: 'postgres:17',
   container_name: 'postgres',
   restart: 'always',
@@ -54,6 +56,7 @@ app.services.postgres = {
 }
 
 app.services.redis = {
+  // renovate: datasource=docker depName=redis
   image: 'redis:7.4',
   restart: 'always',
   healthcheck: {
