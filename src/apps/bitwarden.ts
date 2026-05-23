@@ -12,7 +12,7 @@ app.services.app = {
     SIGNUPS_ALLOWED: 'false',
     ADMIN_TOKEN: secrets.bitwarden_admin_token,
   },
-  volumes: ['/nomad-nfs/bitwarden:/data'],
+  volumes: ['/nomad-ssd/bitwarden:/data'],
 }
 await ingress(app.services.app, {
   hostname: ['bitwarden.wing.lol', 'bitwarden.ts.wingysam.xyz'],

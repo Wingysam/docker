@@ -7,7 +7,7 @@ const app: ComposeSpecification = {}
 app.services = {}
 app.services.app = {
   image: 'ghcr.io/actualbudget/actual-server:26.4.0-alpine',
-  volumes: ['/nomad-nfs/actual:/data'],
+  volumes: ['/nomad-ssd/actual:/data'],
 }
 await ingress(app.services.app, {
   hostname: 'actual.wing.lol',

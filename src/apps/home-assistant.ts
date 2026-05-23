@@ -8,7 +8,7 @@ app.services = {}
 app.services.app = {
   image: 'homeassistant/home-assistant:stable',
   network_mode: 'host',
-  volumes: ['/nomad-nfs/home-assistant/config:/config'],
+  volumes: ['/nomad-ssd/home-assistant/config:/config'],
 }
 await ingress(app.services.app, {
   hostname: 'home-assistant.wingysam.xyz',
