@@ -20,6 +20,7 @@ app.services.app = {
     '/nomad-nfs/jellyfin/Media/Books:/media/books',
     '/nomad-nfs/jellyfin/Media/Education:/media/education',
     '/nomad-nfs/jellyfin/Media/Dashcam:/media/dashcam',
+    '/nomad-nfs/jellyfin/Media/Music:/media/music',
   ],
 }
 await ingress(app.services.app, {
