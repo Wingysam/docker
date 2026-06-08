@@ -33,7 +33,7 @@ app.services.postgres = {
     POSTGRES_DB: 'gitea',
     POSTGRES_PASSWORD: 'gitea',
   },
-  volumes: ['/nomad-ssd/forgejo/postgres:/var/lib/postgresql/data'],
+  volumes: ['/nomad-ssd/forgejo/postgres:/var/lib/postgresql'],
 }
 
 export const state = await App(app)
