@@ -6,8 +6,7 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.forgejo = {
-  // renovate: datasource=docker depName=codeberg.org/forgejo/forgejo
-  image: 'codeberg.org/forgejo/forgejo:7.0.16',
+  image: 'code.forgejo.org/forgejo/forgejo:1.18.3-1',
   environment: {
     TZ: 'America/New_York',
     USER_UID: '1000',
