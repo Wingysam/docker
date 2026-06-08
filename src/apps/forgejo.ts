@@ -6,15 +6,15 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.forgejo = {
-  image: 'code.forgejo.org/forgejo/forgejo:1.18.3-1',
+  image: 'codeberg.org/forgejo/forgejo:15.0.2',
   environment: {
     TZ: 'America/New_York',
     USER_UID: '1000',
     USER_GID: '1000',
-    ROOT_URL: '/Applications/gitea',
+    ROOT_URL: 'https://git.wing.lol',
   },
   volumes: [
-    '/nomad-nfs/forgejo/gitea:/data',
+    '/nomad-nfs/forgejo/data:/data',
     '/etc/timezone:/etc/timezone:ro',
     '/etc/localtime:/etc/localtime:ro',
   ],
@@ -27,7 +27,7 @@ await ingress(app.services.forgejo, {
 
 app.services.postgres = {
   // renovate: datasource=docker depName=postgres
-  image: 'postgres:9.6',
+  image: 'postgres:18',
   environment: {
     POSTGRES_USER: 'gitea',
     POSTGRES_DB: 'gitea',
