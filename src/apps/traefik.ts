@@ -7,7 +7,7 @@ const app: ComposeSpecification = {}
 app.services = {}
 app.services.app = {
   // renovate: datasource=docker depName=traefik
-  image: 'traefik:v3.6.15',
+  image: 'traefik:v3.7.4',
   network_mode: 'host',
   environment: {
     CF_DNS_API_TOKEN: secrets.traefik_cloudflare_token,
