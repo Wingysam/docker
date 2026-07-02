@@ -15,7 +15,7 @@ const app: ComposeSpecification = {}
 app.services = {}
 app.services['immich-server'] = {
   // renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
-  image: 'ghcr.io/immich-app/immich-server:v2.6.2',
+  image: 'ghcr.io/immich-app/immich-server:v3.0.0',
   environment: {
     ...COMMON_ENV,
   },
@@ -29,7 +29,7 @@ await ingress(app.services['immich-server'], {
 
 app.services['immich-machine-learning'] = {
   // renovate: datasource=docker depName=ghcr.io/immich-app/immich-machine-learning
-  image: 'ghcr.io/immich-app/immich-machine-learning:v2.6.2',
+  image: 'ghcr.io/immich-app/immich-machine-learning:v3.0.0',
   environment: {
     ...COMMON_ENV,
   },
@@ -38,12 +38,13 @@ app.services['immich-machine-learning'] = {
 
 app.services.redis = {
   // renovate: datasource=docker depName=docker.io/valkey/valkey
-  image: 'docker.io/valkey/valkey:8-bookworm@sha256:5b8f8c333bef895c925f56629d6ba90aea95a4f7391f62411e625267c600b19c',
+  image:
+    'docker.io/valkey/valkey:8-bookworm@sha256:5b8f8c333bef895c925f56629d6ba90aea95a4f7391f62411e625267c600b19c',
 }
 
 app.services.database = {
   // renovate: datasource=docker depName=ghcr.io/immich-app/postgres
-  image: 'ghcr.io/immich-app/postgres:14-vectorchord0.3.0-pgvectors0.2.0',
+  image: 'ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0',
   environment: {
     POSTGRES_PASSWORD: COMMON_ENV.DB_PASSWORD,
     POSTGRES_USER: COMMON_ENV.DB_USERNAME,
