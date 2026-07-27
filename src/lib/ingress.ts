@@ -50,6 +50,7 @@ export default async function ingress(
               // StripPrefix middleware needs to be wired onto this router
               // before the service forward if `stripPrefix` is set.
               middlewares: stripPrefix ? [`${routerName}-stripprefix`] : undefined,
+              service: routerName,
             },
           },
           middlewares: stripPrefix
