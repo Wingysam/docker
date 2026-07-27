@@ -49,6 +49,13 @@ export default async function ingress(
   if (!Array.isArray(service.labels))
     throw new Error('service.labels must be an array')
 
+  // Only emit an explicit `services:` block and `service:` router reference
+  // when we have a port to define it with. When `port` is undefined, we omit
+  // both and let Traefik auto-link the router to the container's exposed
+  // port via EXPOSE (Docker provider's default behavior). This is the
+  // single-port case (e.g. registry:2), where explicit service naming would
+  // otherwise disable auto-linking and leave the reference dangling.
+  const explicit = port !== undefined
   const middlewareName = stripPrefix ? `${routerName}-stripprefix` : undefined
 
   service.labels.push(
@@ -62,7 +69,7 @@ export default async function ingress(
               tls: 'true',
               'tls.certresolver': options.certResolver,
               entrypoints: entrypoint,
-              service: routerName,
+              service: explicit ? routerName : undefined,
               middlewares: middlewareName,
             },
           },
@@ -75,19 +82,21 @@ export default async function ingress(
                 },
               }
             : undefined,
-          services: {
-            [routerName]: {
-              loadbalancer: {
-                server: {
-                  port,
-                  scheme,
+          services: explicit
+            ? {
+                [routerName]: {
+                  loadbalancer: {
+                    server: {
+                      port,
+                      scheme,
+                    },
+                    serverstransport: insecureSkipVerify
+                      ? 'insecure@file'
+                      : undefined,
+                  },
                 },
-                serverstransport: insecureSkipVerify
-                  ? 'insecure@file'
-                  : undefined,
-              },
-            },
-          },
+              }
+            : undefined,
         },
       },
     })),
