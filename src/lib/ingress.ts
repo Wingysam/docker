@@ -27,16 +27,20 @@ export default async function ingress(
   } = options
   const hostnames = Array.isArray(hostname) ? hostname : [hostname]
 
-  // Disambiguate routers/services when path routing is used. Traefik
-  // recommends hyphens-only resource names; underscores can collide with
-  // the Docker provider's internal segment delimiter in some versions.
+  // Each hostname slug uses `[^A-z0-9]+` collapsed to a single hyphen, so a
+  // single-host slug can never contain `--`. Hostnames are then joined with
+  // `--`, which uniquely marks hostname boundaries — that's why
+  // (domain.example, example) and (domain.example.example) produce different
+  // names (`domain-example--example` vs `domain-example-example`). Both
+  // properties preserve the collision-resistance of the previous underscore
+  // separator while using only Traefik-legal name characters.
   const pathSlug = path
-    ? path.replace(/[^A-z0-9]/g, '-').replace(/^-+|-+$/g, '').toLowerCase()
+    ? path.replace(/[^A-z0-9]+/g, '-').replace(/^-+|-+$/g, '').toLowerCase()
     : ''
   const routerName =
     hostnames
-      .map((h) => h.replace(/[^A-z0-9]/g, '-').toLowerCase())
-      .join('_') + (pathSlug ? `_${pathSlug}` : '')
+      .map((h) => h.replace(/[^A-z0-9]+/g, '-').replace(/^-+|-+$/g, '').toLowerCase())
+      .join('--') + (pathSlug ? `-${pathSlug}` : '')
 
   const hostRule = hostnames.map((h) => `Host(\`${h}\`)`).join(' || ')
   const rule = path ? `(${hostRule}) && PathPrefix(\`${path}\`)` : hostRule
@@ -45,10 +49,6 @@ export default async function ingress(
   if (!Array.isArray(service.labels))
     throw new Error('service.labels must be an array')
 
-  // Explicit `service:` on every router. When a container declares more than
-  // one Traefik service, the Docker provider's auto-linking sees multiple
-  // candidates and refuses to bind — the explicit reference disables that
-  // guesswork.
   const middlewareName = stripPrefix ? `${routerName}-stripprefix` : undefined
 
   service.labels.push(
