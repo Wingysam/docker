@@ -16,11 +16,20 @@ export default async function ingress(
   service: DefinitionsService,
   options: Options,
 ) {
-  const { hostname, path, stripPrefix, port, entrypoint, scheme, insecureSkipVerify } = options
+  const {
+    hostname,
+    path,
+    stripPrefix,
+    port,
+    entrypoint,
+    scheme,
+    insecureSkipVerify,
+  } = options
   const hostnames = Array.isArray(hostname) ? hostname : [hostname]
 
-  // Disambiguate routers/services when path routing is used, so the same
-  // host can serve multiple upstreams under different path prefixes.
+  // Disambiguate routers/services when path routing is used. Traefik
+  // recommends hyphens-only resource names; underscores can collide with
+  // the Docker provider's internal segment delimiter in some versions.
   const pathSlug = path
     ? path.replace(/[^A-z0-9]/g, '-').replace(/^-+|-+$/g, '').toLowerCase()
     : ''
@@ -36,6 +45,12 @@ export default async function ingress(
   if (!Array.isArray(service.labels))
     throw new Error('service.labels must be an array')
 
+  // Explicit `service:` on every router. When a container declares more than
+  // one Traefik service, the Docker provider's auto-linking sees multiple
+  // candidates and refuses to bind — the explicit reference disables that
+  // guesswork.
+  const middlewareName = stripPrefix ? `${routerName}-stripprefix` : undefined
+
   service.labels.push(
     ...(await objectToLabels({
       traefik: {
@@ -47,17 +62,15 @@ export default async function ingress(
               tls: 'true',
               'tls.certresolver': options.certResolver,
               entrypoints: entrypoint,
-              // StripPrefix middleware needs to be wired onto this router
-              // before the service forward if `stripPrefix` is set.
-              middlewares: stripPrefix ? [`${routerName}-stripprefix`] : undefined,
               service: routerName,
+              middlewares: middlewareName,
             },
           },
           middlewares: stripPrefix
             ? {
-                [`${routerName}-stripprefix`]: {
+                [middlewareName!]: {
                   stripprefix: {
-                    prefixes: [path],
+                    prefixes: path,
                   },
                 },
               }
