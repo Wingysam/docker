@@ -57,7 +57,7 @@ app.services.postgres = {
 
 app.services.redis = {
   // renovate: datasource=docker depName=redis
-  image: 'redis:7.4',
+  image: 'redis:8.10',
   restart: 'always',
   healthcheck: {
     test: 'redis-cli ping',
