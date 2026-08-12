@@ -7,7 +7,7 @@ const app: ComposeSpecification = {}
 app.services = {}
 app.services.app = {
   // renovate: datasource=docker depName=ghcr.io/actualbudget/actual-server
-  image: 'ghcr.io/actualbudget/actual-server:26.4.0-alpine',
+  image: 'ghcr.io/actualbudget/actual-server:26.8.1-alpine',
   volumes: ['/nomad-ssd/actual:/data'],
 }
 await ingress(app.services.app, {
