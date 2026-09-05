@@ -8,7 +8,7 @@ const app: ComposeSpecification = {}
 app.services = {}
 app.services.app = {
   // renovate: datasource=docker depName=vaultwarden/server
-  image: 'vaultwarden/server:1.37.0',
+  image: 'vaultwarden/server:1.37.2',
   environment: {
     SIGNUPS_ALLOWED: 'false',
     ADMIN_TOKEN: secrets.bitwarden_admin_token,
