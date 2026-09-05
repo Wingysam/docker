@@ -26,8 +26,6 @@ await ingress(app.services.forgejo, {
   port: 3000,
 })
 
-// Prepare /nomad-ssd/forgejo/runner and register the runner as described in
-// docs/forgejo-runner.md before deploying.
 app.services.runner = {
   // renovate: datasource=docker depName=data.forgejo.org/forgejo/runner
   image: 'data.forgejo.org/forgejo/runner:13',
