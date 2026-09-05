@@ -6,7 +6,7 @@ const app: ComposeSpecification = {}
 
 app.services = {}
 app.services.forgejo = {
-  image: 'codeberg.org/forgejo/forgejo:15.0.2',
+  image: 'codeberg.org/forgejo/forgejo:16.0.3',
   environment: {
     TZ: 'America/New_York',
     USER_UID: '1000',
