@@ -38,7 +38,7 @@ await ingress(app.services.postiz, {
 
 app.services.postgres = {
   // renovate: datasource=docker depName=postgres
-  image: 'postgres:17',
+  image: 'postgres:18',
   container_name: 'postgres',
   restart: 'always',
   environment: {
