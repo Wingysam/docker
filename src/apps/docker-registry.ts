@@ -7,7 +7,7 @@ const app: ComposeSpecification = {}
 app.services = {}
 app.services.app = {
   // renovate: datasource=docker depName=registry
-  image: 'registry:2',
+  image: 'registry:3',
   volumes: ['/nomad-nfs/registry/registry:/var/lib/registry'],
 }
 await ingress(app.services.app, {
