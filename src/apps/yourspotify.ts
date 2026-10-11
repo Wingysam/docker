@@ -38,7 +38,7 @@ await ingress(app.services.web, {
 
 app.services.mongo = {
   // renovate: datasource=docker depName=mongo
-  image: 'mongo:6',
+  image: 'mongo:8',
   volumes: ['/nomad-ssd/yourspotify/db:/data/db'],
 }
 
