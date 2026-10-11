@@ -44,7 +44,7 @@ app.services.redis = {
 
 app.services.database = {
   // renovate: datasource=docker depName=ghcr.io/immich-app/postgres
-  image: 'ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0',
+  image: 'ghcr.io/immich-app/postgres:16-vectorchord0.4.3-pgvectors0.2.0',
   environment: {
     POSTGRES_PASSWORD: COMMON_ENV.DB_PASSWORD,
     POSTGRES_USER: COMMON_ENV.DB_USERNAME,
