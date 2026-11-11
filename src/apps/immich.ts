@@ -15,7 +15,7 @@ const app: ComposeSpecification = {}
 app.services = {}
 app.services['immich-server'] = {
   // renovate: datasource=docker depName=ghcr.io/immich-app/immich-server
-  image: 'ghcr.io/immich-app/immich-server:v3.0.0',
+  image: 'ghcr.io/immich-app/immich-server:v3.4.0',
   environment: {
     ...COMMON_ENV,
   },
@@ -29,7 +29,7 @@ await ingress(app.services['immich-server'], {
 
 app.services['immich-machine-learning'] = {
   // renovate: datasource=docker depName=ghcr.io/immich-app/immich-machine-learning
-  image: 'ghcr.io/immich-app/immich-machine-learning:v3.0.0',
+  image: 'ghcr.io/immich-app/immich-machine-learning:v3.4.0',
   environment: {
     ...COMMON_ENV,
   },
